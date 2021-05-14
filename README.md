@@ -39,6 +39,16 @@ $tokenResponse = $accessTokenRequest->send();
 echo json_encode($tokenResponse) . '<br/>';
 
 /**
+ * Access Token Request Response looks like below:
+ * {
+ *  "token_type": "Bearer",
+ *  "expires_in": 3600,
+ *  "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdW.....",
+ *  "refresh_token": "def50200284b2371cad76b4d2a4e24746c44fd6a322....."
+ * }
+ */
+
+/**
  * Access Token can be cached and reused for 1 hour
  * Before the end of accessToken lifetime every hour
  * you can use the refresh token to fetch new accessToken & refreshToken
@@ -52,16 +62,28 @@ $refreshToken = $tokenResponse['refresh_token'];
  * ******************************************************
  */
 $chargeUrl = 'https://<SERVER_URL>/api/v2.0/charge';
-$orderID = ''; 
-$package = ''; 
-$amount = ''; 
-$callBackURL = ''; 
-$details = ''; 
-$mobile = ''; 
-$email = ''; 
-$reference = '';
+$orderID = ''; //must be unique for each request
+$package = ''; //must be pre-registered with Ghoori
+$amount = ''; //must be greater than or equal to BDT 2
+$callBackURL = ''; //user will be redirected back this url
+$details = ''; //optional
+$mobile = ''; //optional
+$email = ''; //optional
+$reference = ''; //optional
 $chargeRequest = Dotlines\GhooriOnDemand\ChargeRequest::getInstance($chargeUrl, $accessToken, $clientID, $orderID, $package, $amount, $callBackURL, $details, $mobile, $email, $reference);
 echo json_encode($chargeRequest->send()) . '<br/>';
+
+/**
+ * Success Charge Request Response looks like below.
+ * You must redirect the user to the "url" for payment.
+ * {
+ *  "url": "https://sb-payments.ghoori.com.bd/v2.0/pay/BD/bKash?spTransID=5QUWSGRBP41EE46",
+ *  "spTransID": "5QUWSGRBP41EE46",
+ *  "errorCode": "00",
+ *  "errorMessage": "Operation Success"
+ * }
+ * Fail response only contains errorCode & errorMessage
+ */
 
 /**
  * ******************************************************
@@ -73,6 +95,19 @@ $spTransID = '';
 $statusRequest = Dotlines\GhooriOnDemand\StatusRequest::getInstance($statusUrl, $accessToken, $clientID, $spTransID);
 echo json_encode($statusRequest->send()) . '<br/>';
 
+/**
+ * Status Request Response looks like below:
+ * {
+ *  "processingStatus": "CHARGED",
+ *  "status": "DONE",
+ *  "amount": "10.00",
+ *  "errorCode": "00",
+ *  "errorMessage": "Operation Successful",
+ *  "bKashTransID": "6JS7L72YMV",
+ *  "reference": "reference not provided"
+ * }
+ * Fail response only contains errorCode & errorMessage
+ */
 
 /**
  * ******************************************************
@@ -82,6 +117,16 @@ echo json_encode($statusRequest->send()) . '<br/>';
 $refreshTokenRequest = Dotlines\GhooriOnDemand\RefreshTokenRequest::getInstance($tokenUrl, $accessToken, $clientID, $clientSecret, $refreshToken);
 $tokenResponse = $refreshTokenRequest->send();
 echo json_encode($tokenResponse) . '<br/>';
+
+/**
+ * Refresh Token Request Response looks like below:
+ * {
+ *  "token_type": "Bearer",
+ *  "expires_in": 3600,
+ *  "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdW.....",
+ *  "refresh_token": "def50200284b2371cad76b4d2a4e24746c44fd6a322....."
+ * }
+ */
 ```
 
 ## Changelog
