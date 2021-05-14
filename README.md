@@ -7,9 +7,8 @@
 
 ---
 
-This package can be used for OnDemand payment integration with [Ghoori](http://ghoori.com.bd) Platform.
-For the credentials please contact with support@ghoori.com.bd or call 8809612332215
-
+This composer package can be used for OnDemand payment integration with [Ghoori](http://ghoori.com.bd) Platform.
+For the credentials, please contact with support@ghoori.com.bd or call 8809612332215
 
 ## Installation
 
