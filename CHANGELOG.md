@@ -2,6 +2,10 @@
 
 All notable changes to `ghoori-ondemand` package will be listed in this file.
 
+## 1.0.6 - 2021-05-15
+
+- Package details updated
+
 ## 1.0.5 - 2021-05-15
 
 - Removes unnecessary packages from dependencies
