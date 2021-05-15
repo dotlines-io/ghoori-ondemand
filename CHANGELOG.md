@@ -2,6 +2,9 @@
 
 All notable changes to `ghoori-ondemand` package will be listed in this file.
 
+## 1.0.3 - 2021-05-15
+
+- Introduces using some classes from dotlines-io/ghoori core package
 
 ## 1.0.2 - 2021-05-15
 
