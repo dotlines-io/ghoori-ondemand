@@ -1,7 +1,8 @@
 {
     "name": "dotlines-io/ghoori-ondemand",
-    "description": "This is my package to complete payment via Ghoori",
+    "description": "This package can be used for OnDemand Payment integration with Ghoori Platform.",
     "keywords": [
+        "dotlines",
         "dotlines-io",
         "ghoori-ondemand"
     ],
