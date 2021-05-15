@@ -17,6 +17,7 @@
     "require": {
         "php": "^7.0",
         "ext-json": "*",
+        "dotlines-io/ghoori": "^1.0",
         "guzzlehttp/guzzle": "^7.3"
     },
     "require-dev": {

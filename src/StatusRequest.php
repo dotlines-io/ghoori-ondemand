@@ -3,6 +3,7 @@
 
 namespace Dotlines\GhooriOnDemand;
 
+use Dotlines\Ghoori\Request;
 
 class StatusRequest extends Request
 {

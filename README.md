@@ -33,7 +33,7 @@ $password = '';
 $clientID = '';
 $clientSecret = '';
 
-$accessTokenRequest = Dotlines\GhooriOnDemand\AccessTokenRequest::getInstance($tokenUrl, $username, $password, $clientID, $clientSecret);
+$accessTokenRequest = Dotlines\Ghoori\AccessTokenRequest::getInstance($tokenUrl, $username, $password, $clientID, $clientSecret);
 $tokenResponse = $accessTokenRequest->send();
 echo json_encode($tokenResponse) . '<br/>';
 
@@ -113,7 +113,7 @@ echo json_encode($statusRequest->send()) . '<br/>';
  * ******************* Refresh Token *******************
  * ******************************************************
  */
-$refreshTokenRequest = Dotlines\GhooriOnDemand\RefreshTokenRequest::getInstance($tokenUrl, $accessToken, $clientID, $clientSecret, $refreshToken);
+$refreshTokenRequest = Dotlines\Ghoori\RefreshTokenRequest::getInstance($tokenUrl, $accessToken, $clientID, $clientSecret, $refreshToken);
 $tokenResponse = $refreshTokenRequest->send();
 echo json_encode($tokenResponse) . '<br/>';
 

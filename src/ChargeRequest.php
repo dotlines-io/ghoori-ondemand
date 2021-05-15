@@ -3,6 +3,8 @@
 
 namespace Dotlines\GhooriOnDemand;
 
+use Dotlines\Ghoori\Request;
+
 class ChargeRequest extends Request
 {
     private $clientID;
