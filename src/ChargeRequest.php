@@ -39,6 +39,7 @@ class ChargeRequest extends Request
      */
     private function __construct(string $url, string $accessToken, int $clientID, string $orderID, string $package, float $amount, string $callBackURL, string $details = '', string $mobile = '', string $email = '', string $reference = '')
     {
+        $this->requestMethod = 'POST';
         $this->url = $url;
         $this->accessToken = $accessToken;
 

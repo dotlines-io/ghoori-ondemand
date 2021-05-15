@@ -25,6 +25,7 @@ class StatusRequest extends Request
      */
     private function __construct(string $url, string $accessToken, int $clientID, string $spTransID)
     {
+        $this->requestMethod = 'POST';
         $this->url = $url;
         $this->accessToken = $accessToken;
 
