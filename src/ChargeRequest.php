@@ -3,7 +3,7 @@
 
 namespace Dotlines\GhooriOnDemand;
 
-use Dotlines\Ghoori\Request;
+use Dotlines\Core\Request;
 
 class ChargeRequest extends Request
 {
