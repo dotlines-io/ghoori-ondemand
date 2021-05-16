@@ -33,7 +33,7 @@ $password = '';
 $clientID = '';
 $clientSecret = '';
 
-$accessTokenRequest = Dotlines\Ghoori\AccessTokenRequest::getInstance($tokenUrl, $username, $password, $clientID, $clientSecret);
+$accessTokenRequest = \Dotlines\Ghoori\AccessTokenRequest::getInstance($tokenUrl, $username, $password, $clientID, $clientSecret);
 $tokenResponse = $accessTokenRequest->send();
 echo json_encode($tokenResponse) . '<br/>';
 
@@ -69,7 +69,7 @@ $details = ''; //optional
 $mobile = ''; //optional
 $email = ''; //optional
 $reference = ''; //optional
-$chargeRequest = Dotlines\GhooriOnDemand\ChargeRequest::getInstance($chargeUrl, $accessToken, $clientID, $orderID, $package, $amount, $callBackURL, $details, $mobile, $email, $reference);
+$chargeRequest = \Dotlines\GhooriOnDemand\ChargeRequest::getInstance($chargeUrl, $accessToken, $clientID, $orderID, $package, $amount, $callBackURL, $details, $mobile, $email, $reference);
 echo json_encode($chargeRequest->send()) . '<br/>';
 
 /**
@@ -91,7 +91,7 @@ echo json_encode($chargeRequest->send()) . '<br/>';
  */
 $statusUrl = 'https://<SERVER_URL>/api/v2.0/status';
 $spTransID = '';
-$statusRequest = Dotlines\GhooriOnDemand\StatusRequest::getInstance($statusUrl, $accessToken, $clientID, $spTransID);
+$statusRequest = \Dotlines\GhooriOnDemand\StatusRequest::getInstance($statusUrl, $accessToken, $clientID, $spTransID);
 echo json_encode($statusRequest->send()) . '<br/>';
 
 /**
@@ -113,7 +113,7 @@ echo json_encode($statusRequest->send()) . '<br/>';
  * ******************* Refresh Token *******************
  * ******************************************************
  */
-$refreshTokenRequest = Dotlines\Ghoori\RefreshTokenRequest::getInstance($tokenUrl, $accessToken, $clientID, $clientSecret, $refreshToken);
+$refreshTokenRequest = \Dotlines\Ghoori\RefreshTokenRequest::getInstance($tokenUrl, $accessToken, $clientID, $clientSecret, $refreshToken);
 $tokenResponse = $refreshTokenRequest->send();
 echo json_encode($tokenResponse) . '<br/>';
 
