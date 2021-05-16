@@ -2,6 +2,10 @@
 
 All notable changes to `dotlines-io/ghoori-ondemand` package will be listed in this file.
 
+## 1.0.9 - 2021-05-17
+
+- Sets minimum PHP version to PHP 7.4
+
 ## 1.0.8 - 2021-05-16
 
 - Updates Request class path from dotlines-io/core package
