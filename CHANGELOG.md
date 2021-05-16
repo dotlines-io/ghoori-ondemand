@@ -2,6 +2,10 @@
 
 All notable changes to `ghoori-ondemand` package will be listed in this file.
 
+## 1.0.7 - 2021-05-16
+
+- Corrects the full qualified class paths used in the examples
+
 ## 1.0.6 - 2021-05-15
 
 - Package details updated
