@@ -7,15 +7,15 @@ use Dotlines\Core\Request;
 
 class ChargeRequest extends Request
 {
-    private $clientID;
-    private $orderID;
-    private $package;
-    private $amount;
-    private $callBackURL;
-    private $details;
-    private $mobile;
-    private $email;
-    private $reference;
+    private string $clientID;
+    private string $orderID;
+    private string $package;
+    private float $amount;
+    private string $callBackURL;
+    private string $details;
+    private string $mobile;
+    private string $email;
+    private string $reference;
 
     public static function getInstance(string $url, string $accessToken, int $clientID, string $orderID, string $package, float $amount, string $callBackURL, string $details = '', string $mobile = '', string $email = '', string $reference = ''): ChargeRequest
     {

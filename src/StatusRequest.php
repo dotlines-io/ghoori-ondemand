@@ -7,8 +7,8 @@ use Dotlines\Core\Request;
 
 class StatusRequest extends Request
 {
-    private $clientID;
-    private $spTransID;
+    private int $clientID;
+    private string $spTransID;
 
     public static function getInstance(string $url, string $accessToken, int $clientID, string $spTransID): StatusRequest
     {
