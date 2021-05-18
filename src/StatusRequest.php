@@ -37,7 +37,7 @@ class StatusRequest extends Request
     {
         return [
             'clientID' => (string)$this->clientID,
-            'spTransID' => $this->spTransID
+            'spTransID' => $this->spTransID,
         ];
     }
 }

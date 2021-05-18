@@ -7,7 +7,6 @@ namespace Dotlines\GhooriOnDemand\Tests;
 
 use Dotlines\Ghoori\AccessTokenRequest;
 use Dotlines\GhooriOnDemand\ChargeRequest;
-use JsonException;
 use PHPUnit\Framework\TestCase;
 
 class ChargeRequestTest extends TestCase

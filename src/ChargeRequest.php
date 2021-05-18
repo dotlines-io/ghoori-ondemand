@@ -61,22 +61,22 @@ class ChargeRequest extends Request
             'orderID' => $this->orderID,
             'package' => $this->package,
             'amount' => $this->amount,
-            'callBackURL' => $this->callBackURL
+            'callBackURL' => $this->callBackURL,
         ];
 
-        if (!empty($this->details)) {
+        if (! empty($this->details)) {
             $params['details'] = $this->details;
         }
 
-        if (!empty($this->mobile)) {
+        if (! empty($this->mobile)) {
             $params['mobile'] = $this->mobile;
         }
 
-        if (!empty($this->email)) {
+        if (! empty($this->email)) {
             $params['email'] = $this->email;
         }
 
-        if (!empty($this->reference)) {
+        if (! empty($this->reference)) {
             $params['reference'] = $this->reference;
         }
 
