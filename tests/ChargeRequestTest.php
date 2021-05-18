@@ -85,6 +85,4 @@ class ChargeRequestTest extends TestCase
         self::assertNotEmpty($chargeResponse['errorCode']);
         self::assertNotEmpty($chargeResponse['errorResponse']);
     }
-
-
 }
