@@ -159,7 +159,7 @@ class ChargeRequestTest extends TestCase
     final public function it_can_not_fetch_url_with_amount_less_than_2(): void
     {
         $orderID = 'test-app-' . random_int(111111, 999999);
-        $chargeRequest = ChargeRequest::getInstance($this->chargeUrl, $this->accessToken, $this->clientID, $orderID, $this->package, 2-5, $this->callBackURL, $this->details, $this->mobile, $this->email, $this->reference);
+        $chargeRequest = ChargeRequest::getInstance($this->chargeUrl, $this->accessToken, $this->clientID, $orderID, $this->package, 2 - 5, $this->callBackURL, $this->details, $this->mobile, $this->email, $this->reference);
         $chargeResponse = $chargeRequest->send();
 
         self::assertArrayNotHasKey('url', $chargeResponse);
@@ -176,7 +176,7 @@ class ChargeRequestTest extends TestCase
     final public function it_fails_to_fetch_url_with_amount_greater_than_99999(): void
     {
         $orderID = 'test-app-' . random_int(111111, 999999);
-        $chargeRequest = ChargeRequest::getInstance($this->chargeUrl, $this->accessToken, $this->clientID, $orderID, $this->package, 99999+1, $this->callBackURL, $this->details, $this->mobile, $this->email, $this->reference);
+        $chargeRequest = ChargeRequest::getInstance($this->chargeUrl, $this->accessToken, $this->clientID, $orderID, $this->package, 99999 + 1, $this->callBackURL, $this->details, $this->mobile, $this->email, $this->reference);
         $chargeResponse = $chargeRequest->send();
 
         self::assertArrayNotHasKey('url', $chargeResponse);
