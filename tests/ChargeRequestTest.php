@@ -39,6 +39,52 @@ class ChargeRequestTest extends TestCase
         $reference = ''; //optional
         $chargeRequest = ChargeRequest::getInstance($chargeUrl, $accessToken, $this->clientID, $orderID, $package, $amount, $callBackURL, $details, $mobile, $email, $reference);
 
-        self::assertNotEmpty($chargeRequest->send());
+        $chargeResponse = $chargeRequest->send();
+
+        self::assertNotEmpty($chargeResponse);
+        self::assertArrayHasKey('url', $chargeResponse);
+        self::assertArrayHasKey('spTransID', $chargeResponse);
+        self::assertArrayHasKey('errorCode', $chargeResponse);
+        self::assertArrayHasKey('errorMessage', $chargeResponse);
+        self::assertNotEmpty($chargeResponse['url']);
+        self::assertNotEmpty($chargeResponse['spTransID']);
+        self::assertNotEmpty($chargeResponse['errorCode']);
+        self::assertNotEmpty($chargeResponse['errorMessage']);
     }
+
+
+    /**
+     * @test
+     */
+    final public function it_gets_exception_with_wrong_serverUrl(): void
+    {
+        $accessTokenRequest = AccessTokenRequest::getInstance($this->tokenUrl, $this->username, $this->password, $this->clientID, $this->clientSecret);
+        $tokenResponse = $accessTokenRequest->send();
+
+        $accessToken = $tokenResponse['access_token'];
+
+        $chargeUrl = $this->serverUrl . "/api/v2.0/charge";
+        $orderID = 'test-app-' . random_int(111111, 999999);
+        $package = 'BBC_Janala_Course1';
+        $amount = random_int(10, 100);
+        $callBackURL = 'https://test-app.local';
+        $details = 'Test Transaction'; //optional
+        $mobile = ''; //optional
+        $email = ''; //optional
+        $reference = ''; //optional
+        $chargeRequest = ChargeRequest::getInstance($chargeUrl, $accessToken, $this->clientID, $orderID, $package, $amount, $callBackURL, $details, $mobile, $email, $reference);
+        $chargeResponse = $chargeRequest->send();
+
+        self::assertNotEmpty($chargeResponse);
+        self::assertArrayHasKey('url', $chargeResponse);
+        self::assertArrayHasKey('spTransID', $chargeResponse);
+        self::assertArrayHasKey('errorCode', $chargeResponse);
+        self::assertArrayHasKey('errorResponse', $chargeResponse);
+        self::assertNotEmpty($chargeResponse['url']);
+        self::assertNotEmpty($chargeResponse['spTransID']);
+        self::assertNotEmpty($chargeResponse['errorCode']);
+        self::assertNotEmpty($chargeResponse['errorResponse']);
+    }
+
+
 }
