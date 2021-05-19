@@ -6,8 +6,8 @@ namespace Dotlines\GhooriOnDemand\Tests;
 use Dotlines\Ghoori\AccessTokenRequest;
 use Dotlines\GhooriOnDemand\ChargeRequest;
 use Exception;
-use PHPUnit\Framework\TestCase;
 use GuzzleHttp\Exception\ClientException;
+use PHPUnit\Framework\TestCase;
 
 class StatusRequestTest extends TestCase
 {
@@ -79,7 +79,6 @@ class StatusRequestTest extends TestCase
         self::assertNotEmpty($statusResponse['processingStatus']);
         self::assertNotEmpty($statusResponse['status']);
         self::assertNotEmpty($statusResponse['amount']);
-
     }
 
     /**
@@ -157,7 +156,7 @@ class StatusRequestTest extends TestCase
         self::assertArrayNotHasKey('reference', $statusResponse);
         self::assertArrayNotHasKey('surcharges', $statusResponse);
 
-        self::assertNotEquals("00",$statusResponse['errorCode']);
+        self::assertNotEquals("00", $statusResponse['errorCode']);
     }
 
 
@@ -182,7 +181,7 @@ class StatusRequestTest extends TestCase
         self::assertArrayNotHasKey('reference', $statusResponse);
         self::assertArrayNotHasKey('surcharges', $statusResponse);
 
-        self::assertNotEquals("00",$statusResponse['errorCode']);
+        self::assertNotEquals("00", $statusResponse['errorCode']);
     }
 
     /**
@@ -207,10 +206,6 @@ class StatusRequestTest extends TestCase
         self::assertArrayHasKey('reference', $statusResponse);
         self::assertArrayNotHasKey('surcharges', $statusResponse);
 
-        self::assertNotEquals("00",$statusResponse['errorCode']);
+        self::assertNotEquals("00", $statusResponse['errorCode']);
     }
-
-
-
 }
-
