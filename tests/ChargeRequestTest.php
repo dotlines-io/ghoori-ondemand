@@ -8,9 +8,9 @@ namespace Dotlines\GhooriOnDemand\Tests;
 
 use Dotlines\Ghoori\AccessTokenRequest;
 use Dotlines\GhooriOnDemand\ChargeRequest;
-use PHPUnit\Framework\TestCase;
 use Exception;
 use GuzzleHttp\Exception\ClientException;
+use PHPUnit\Framework\TestCase;
 
 class ChargeRequestTest extends TestCase
 {
