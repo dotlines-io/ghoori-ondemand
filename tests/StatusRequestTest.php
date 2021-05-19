@@ -81,6 +81,136 @@ class StatusRequestTest extends TestCase
         self::assertNotEmpty($statusResponse['processingStatus']);
         self::assertNotEmpty($statusResponse['status']);
         self::assertNotEmpty($statusResponse['amount']);
-
     }
+
+    /**
+     * @test
+     * @throws Exception
+     */
+    final public function it_gets_exception_with_empty_statusUrl(): void
+    {
+        $chargeRequest = ChargeRequest::getInstance($this->chargeUrl, $this->accessToken, $this->clientID, $this->orderID, $this->package, $this->amount, $this->callBackURL, $this->details, $this->mobile, $this->email, $this->reference);
+
+        $chargeResponse = $chargeRequest->send();
+
+        $spTransID = (string)$chargeResponse['spTransID'];
+        $this->statusUrl = "";
+        $statusRequest = \Dotlines\GhooriOnDemand\StatusRequest::getInstance($this->statusUrl, $this->accessToken, $this->clientID, $spTransID);
+        $this->expectException(Exception::class);
+        $statusRequest->send();
+    }
+
+    /**
+     * @test
+     * @throws Exception
+     */
+    final public function it_gets_exception_with_invalid_statusUrl(): void
+    {
+        $chargeRequest = ChargeRequest::getInstance($this->chargeUrl, $this->accessToken, $this->clientID, $this->orderID, $this->package, $this->amount, $this->callBackURL, $this->details, $this->mobile, $this->email, $this->reference);
+
+        $chargeResponse = $chargeRequest->send();
+
+        $spTransID = (string)$chargeResponse['spTransID'];
+        $this->statusUrl = "https://sb-payments.ghoori.com.bd/api/v2.0/status/wrong";
+        $statusRequest = \Dotlines\GhooriOnDemand\StatusRequest::getInstance($this->statusUrl, $this->accessToken, $this->clientID, $spTransID);
+        $this->expectException(ClientException::class);
+        $statusRequest->send();
+    }
+
+    /**
+     * @test
+     * @throws Exception
+     */
+    final public function it_gets_exception_with_invalid_accessToken(): void
+    {
+        $chargeRequest = ChargeRequest::getInstance($this->chargeUrl, $this->accessToken, $this->clientID, $this->orderID, $this->package, $this->amount, $this->callBackURL, $this->details, $this->mobile, $this->email, $this->reference);
+
+        $chargeResponse = $chargeRequest->send();
+
+        $spTransID = (string)$chargeResponse['spTransID'];
+        $this->accessToken = "ahsduhefasllishduekfhsfuieulandshksfk";
+        $statusRequest = \Dotlines\GhooriOnDemand\StatusRequest::getInstance($this->statusUrl, $this->accessToken, $this->clientID, $spTransID);
+        $this->expectException(ClientException::class);
+        $statusRequest->send();
+    }
+
+
+    /**
+     * @test
+     * @throws Exception
+     */
+    final public function it_gets_error_with_invalid_clientID(): void
+    {
+        $chargeRequest = ChargeRequest::getInstance($this->chargeUrl, $this->accessToken, $this->clientID, $this->orderID, $this->package, $this->amount, $this->callBackURL, $this->details, $this->mobile, $this->email, $this->reference);
+        $chargeResponse = $chargeRequest->send();
+        $spTransID = (string)$chargeResponse['spTransID'];
+        $this->clientID = 99999;
+        $statusRequest = \Dotlines\GhooriOnDemand\StatusRequest::getInstance($this->statusUrl, $this->accessToken, $this->clientID, $spTransID);
+        $statusResponse = $statusRequest->send();
+
+        self::assertNotEmpty($statusResponse);
+        self::assertArrayNotHasKey('processingStatus', $statusResponse);
+        self::assertArrayNotHasKey('status', $statusResponse);
+        self::assertArrayNotHasKey('amount', $statusResponse);
+        self::assertArrayHasKey('errorCode', $statusResponse);
+        self::assertArrayHasKey('errorMessage', $statusResponse);
+        self::assertArrayNotHasKey('bKashTransID', $statusResponse);
+        self::assertArrayNotHasKey('reference', $statusResponse);
+        self::assertArrayNotHasKey('surcharges', $statusResponse);
+
+        self::assertNotEquals("00",$statusResponse['errorCode']);
+    }
+
+
+
+    /**
+     * @test
+     * @throws Exception
+     */
+    final public function it_gets_error_with_empty_spTransID(): void
+    {
+        $spTransID = "";
+        $statusRequest = \Dotlines\GhooriOnDemand\StatusRequest::getInstance($this->statusUrl, $this->accessToken, $this->clientID, $spTransID);
+        $statusResponse = $statusRequest->send();
+
+        self::assertNotEmpty($statusResponse);
+        self::assertArrayNotHasKey('processingStatus', $statusResponse);
+        self::assertArrayNotHasKey('status', $statusResponse);
+        self::assertArrayNotHasKey('amount', $statusResponse);
+        self::assertArrayHasKey('errorCode', $statusResponse);
+        self::assertArrayHasKey('errorMessage', $statusResponse);
+        self::assertArrayNotHasKey('bKashTransID', $statusResponse);
+        self::assertArrayNotHasKey('reference', $statusResponse);
+        self::assertArrayNotHasKey('surcharges', $statusResponse);
+
+        self::assertNotEquals("00",$statusResponse['errorCode']);
+    }
+
+    /**
+     * @test
+     * @throws Exception
+     */
+    final public function it_gets_error_with_invalid_spTransID(): void
+    {
+        $chargeRequest = ChargeRequest::getInstance($this->chargeUrl, $this->accessToken, $this->clientID, $this->orderID, $this->package, $this->amount, $this->callBackURL, $this->details, $this->mobile, $this->email, $this->reference);
+        $chargeResponse = $chargeRequest->send();
+        $spTransID = (string)$chargeResponse['spTransID']."YU";
+        $statusRequest = \Dotlines\GhooriOnDemand\StatusRequest::getInstance($this->statusUrl, $this->accessToken, $this->clientID, $spTransID);
+        $statusResponse = $statusRequest->send();
+
+        self::assertNotEmpty($statusResponse);
+        self::assertArrayHasKey('processingStatus', $statusResponse);
+        self::assertArrayHasKey('status', $statusResponse);
+        self::assertArrayHasKey('amount', $statusResponse);
+        self::assertArrayHasKey('errorCode', $statusResponse);
+        self::assertArrayHasKey('errorMessage', $statusResponse);
+        self::assertArrayHasKey('bKashTransID', $statusResponse);
+        self::assertArrayHasKey('reference', $statusResponse);
+        self::assertArrayNotHasKey('surcharges', $statusResponse);
+
+        self::assertNotEquals("00",$statusResponse['errorCode']);
+    }
+
+
+
 }

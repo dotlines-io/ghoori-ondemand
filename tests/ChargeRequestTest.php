@@ -9,6 +9,8 @@ namespace Dotlines\GhooriOnDemand\Tests;
 use Dotlines\Ghoori\AccessTokenRequest;
 use Dotlines\GhooriOnDemand\ChargeRequest;
 use PHPUnit\Framework\TestCase;
+use Exception;
+use GuzzleHttp\Exception\ClientException;
 
 class ChargeRequestTest extends TestCase
 {
@@ -48,7 +50,6 @@ class ChargeRequestTest extends TestCase
 
     /**
      * @test
-     * @throws Exception
      */
     final public function it_can_fetch_charge_url(): void
     {
