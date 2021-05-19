@@ -3,13 +3,10 @@
 
 namespace Dotlines\GhooriOnDemand\Tests;
 
-
-use PHPUnit\Framework\TestCase;
 use Dotlines\Ghoori\AccessTokenRequest;
 use Dotlines\GhooriOnDemand\ChargeRequest;
-use Dotlines\GhooriOnDemand\StatusRequest;
 use Exception;
-use GuzzleHttp\Exception\ClientException;
+use PHPUnit\Framework\TestCase;
 
 class StatusRequestTest extends TestCase
 {
@@ -81,6 +78,7 @@ class StatusRequestTest extends TestCase
         self::assertNotEmpty($statusResponse['processingStatus']);
         self::assertNotEmpty($statusResponse['status']);
         self::assertNotEmpty($statusResponse['amount']);
+<<<<<<< HEAD
     }
 
     /**
@@ -214,3 +212,7 @@ class StatusRequestTest extends TestCase
 
 
 }
+=======
+    }
+}
+>>>>>>> 0884a928380b60e49a951da8825a44e1080c48a8
