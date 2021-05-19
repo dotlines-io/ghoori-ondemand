@@ -174,4 +174,143 @@ class ChargeRequestTest extends TestCase
         self::assertNotEmpty($chargeResponse['errorCode']);
         self::assertNotEmpty($chargeResponse['errorMessage']);
     }
+
+    /**
+     * @test
+     */
+    final public function it_can_not_fetch_url_with_amount_greater_than_one_lac(): void
+    {
+        $orderID = 'test-app-' . random_int(111111, 999999);
+        $amount = 100000;
+        $chargeRequest = ChargeRequest::getInstance($this->chargeUrl, $this->accessToken, $this->clientID, $orderID, $this->package,$amount, $this->callBackURL, $this->details, $this->mobile, $this->email, $this->reference);
+        $chargeResponse = $chargeRequest->send();
+
+        self::assertArrayNotHasKey('url', $chargeResponse);
+        self::assertArrayNotHasKey('spTransID', $chargeResponse);
+        self::assertArrayHasKey('errorCode', $chargeResponse);
+        self::assertArrayHasKey('errorMessage', $chargeResponse);
+        self::assertNotEmpty($chargeResponse['errorCode']);
+        self::assertNotEmpty($chargeResponse['errorMessage']);
+    }
+
+    /**
+     * @test
+     */
+    final public function it_can_not_fetch_url_with_empty_package(): void
+    {
+        $orderID = 'test-app-' . random_int(111111, 999999);
+        $amount = random_int(10, 100);
+        $chargeRequest = ChargeRequest::getInstance($this->chargeUrl, $this->accessToken, $this->clientID, $orderID, "",$amount, $this->callBackURL, $this->details, $this->mobile, $this->email, $this->reference);
+        $chargeResponse = $chargeRequest->send();
+
+        self::assertNotEmpty($chargeResponse);
+        self::assertArrayNotHasKey('url', $chargeResponse);
+        self::assertArrayNotHasKey('spTransID', $chargeResponse);
+        self::assertArrayHasKey('errorCode', $chargeResponse);
+        self::assertArrayHasKey('errorMessage', $chargeResponse);
+        self::assertNotEmpty($chargeResponse['errorCode']);
+        self::assertNotEmpty($chargeResponse['errorMessage']);
+    }
+
+    /**
+     * @test
+     */
+    final public function it_can_not_fetch_url_with_wrong_package(): void
+    {
+        $orderID = 'test-app-' . random_int(111111, 999999);
+        $amount = random_int(10, 100);
+        $chargeRequest = ChargeRequest::getInstance($this->chargeUrl, $this->accessToken, $this->clientID, $orderID, "wrong_package",$amount, $this->callBackURL, $this->details, $this->mobile, $this->email, $this->reference);
+        $chargeResponse = $chargeRequest->send();
+
+        self::assertNotEmpty($chargeResponse);
+        self::assertArrayNotHasKey('url', $chargeResponse);
+        self::assertArrayNotHasKey('spTransID', $chargeResponse);
+        self::assertArrayHasKey('errorCode', $chargeResponse);
+        self::assertArrayHasKey('errorMessage', $chargeResponse);
+        self::assertNotEmpty($chargeResponse['errorCode']);
+        self::assertNotEmpty($chargeResponse['errorMessage']);
+    }
+
+    /**
+     * @test
+     */
+    final public function it_can_not_fetch_url_with_empty_callbackUrl(): void
+    {
+        $orderID = 'test-app-' . random_int(111111, 999999);
+        $amount = random_int(10, 100);
+        $this->callBackURL = "";
+        $chargeRequest = ChargeRequest::getInstance($this->chargeUrl, $this->accessToken, $this->clientID, $orderID, $this->package,$amount, $this->callBackURL, $this->details, $this->mobile, $this->email, $this->reference);
+        $chargeResponse = $chargeRequest->send();
+
+        self::assertNotEmpty($chargeResponse);
+        self::assertArrayNotHasKey('url', $chargeResponse);
+        self::assertArrayNotHasKey('spTransID', $chargeResponse);
+        self::assertArrayHasKey('errorCode', $chargeResponse);
+        self::assertArrayHasKey('errorMessage', $chargeResponse);
+        self::assertNotEmpty($chargeResponse['errorCode']);
+        self::assertNotEmpty($chargeResponse['errorMessage']);
+    }
+
+    /**
+     * @test
+     */
+
+    final public function it_can_not_fetch_url_with_invalid_callbackUrl(): void
+    {
+        $orderID = 'test-app-' . random_int(111111, 999999);
+        $amount = random_int(10, 100);
+        $this->callBackURL = "randomsite";
+        $chargeRequest = ChargeRequest::getInstance($this->chargeUrl, $this->accessToken, $this->clientID, $orderID, $this->package,$amount, $this->callBackURL, $this->details, $this->mobile, $this->email, $this->reference);
+        $chargeResponse = $chargeRequest->send();
+
+        self::assertNotEmpty($chargeResponse);
+        self::assertArrayNotHasKey('url', $chargeResponse);
+        self::assertArrayNotHasKey('spTransID', $chargeResponse);
+        self::assertArrayHasKey('errorCode', $chargeResponse);
+        self::assertArrayHasKey('errorMessage', $chargeResponse);
+        self::assertNotEmpty($chargeResponse['errorCode']);
+        self::assertNotEmpty($chargeResponse['errorMessage']);
+    }
+    /**
+     * @test
+     */
+
+    final public function it_can_not_fetch_url_with_invalid_mobile_number(): void
+    {
+        $orderID = 'test-app-' . random_int(111111, 999999);
+        $amount = random_int(10, 100);
+        $this->mobile = '1234333333';
+        $chargeRequest = ChargeRequest::getInstance($this->chargeUrl, $this->accessToken, $this->clientID, $orderID, $this->package,$amount, $this->callBackURL, $this->details, $this->mobile, $this->email, $this->reference);
+        $chargeResponse = $chargeRequest->send();
+
+        self::assertNotEmpty($chargeResponse);
+        self::assertArrayNotHasKey('url', $chargeResponse);
+        self::assertArrayNotHasKey('spTransID', $chargeResponse);
+        self::assertArrayHasKey('errorCode', $chargeResponse);
+        self::assertArrayHasKey('errorMessage', $chargeResponse);
+        self::assertNotEmpty($chargeResponse['errorCode']);
+        self::assertNotEmpty($chargeResponse['errorMessage']);
+    }
+
+    /**
+     * @test
+     */
+
+    final public function it_can_not_fetch_url_with_invalid_email(): void
+    {
+        $orderID = 'test-app-' . random_int(111111, 999999);
+        $amount = random_int(10, 100);
+        $this->email = 'lsadjjoe';
+        $chargeRequest = ChargeRequest::getInstance($this->chargeUrl, $this->accessToken, $this->clientID, $orderID, $this->package,$amount, $this->callBackURL, $this->details, $this->mobile, $this->email, $this->reference);
+        $chargeResponse = $chargeRequest->send();
+
+        self::assertNotEmpty($chargeResponse);
+        self::assertArrayNotHasKey('url', $chargeResponse);
+        self::assertArrayNotHasKey('spTransID', $chargeResponse);
+        self::assertArrayHasKey('errorCode', $chargeResponse);
+        self::assertArrayHasKey('errorMessage', $chargeResponse);
+        self::assertNotEmpty($chargeResponse['errorCode']);
+        self::assertNotEmpty($chargeResponse['errorMessage']);
+    }
+
 }
