@@ -7,7 +7,6 @@
 
 namespace Dotlines\GhooriOnDemand\Models;
 
-
 /**
  * You will provide a Webhook receiving API endpoint to Ghoori
  * After that Ghoori will start pushing Webhooks to this API endpoint
