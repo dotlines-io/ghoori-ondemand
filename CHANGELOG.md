@@ -2,6 +2,10 @@
 
 All notable changes to `dotlines-io/ghoori-ondemand` package will be listed in this file.
 
+## 1.1.3 - 2021-05-20
+
+- Introduces Webhook Processor Interface
+
 ## 1.1.2 - 2021-05-20
 
 - Improves package security
