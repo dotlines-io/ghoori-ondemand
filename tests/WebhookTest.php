@@ -2,8 +2,6 @@
 
 namespace Dotlines\GhooriOnDemand\Tests;
 
-use Dotenv\Dotenv;
-use Dotlines\GhooriOnDemand\ChargeRequest;
 use Dotlines\GhooriOnDemand\Models\Webhook;
 use PHPUnit\Framework\TestCase;
 
@@ -42,7 +40,7 @@ class WebhookTest extends TestCase
 
     final public function it_can_construct_a_webhook_object(): void
     {
-        $webhookObj = new Webhook($this->spTransID, $this->package, $this->mobile, $this->amount, $this->bKashMsisdn, $this->status, $this->paymentDate, $this->processingStatus, $this->bKashTransID, $this->actionTaken );
+        $webhookObj = new Webhook($this->spTransID, $this->package, $this->mobile, $this->amount, $this->bKashMsisdn, $this->status, $this->paymentDate, $this->processingStatus, $this->bKashTransID, $this->actionTaken);
         self::assertEquals("Dotlines\GhooriOnDemand\Models\Webhook", get_class($webhookObj));
     }
 }
