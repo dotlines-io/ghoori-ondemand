@@ -2,7 +2,6 @@
 
 namespace Dotlines\GhooriOnDemand\Tests;
 
-use Dotlines\GhooriOnDemand\Models\Webhook;
 use Dotlines\GhooriOnDemand\Models\WebhookResponse;
 use PHPUnit\Framework\TestCase;
 
